@@ -124,12 +124,11 @@ router.patch("/:movieId", (req, res, next) => {
 router.delete("/:movieId", (req, res, next) => {
     const movieId = req.params.movieId;
 
-    Movie.deleteOne({id: movieId})
+    Movie.findByIdAndDelete(movieId)
     .then(result => {
         res.status(200).json({
             message: "Movie Deleted",
             result,
-
             metadata: {
                 host: req.hostname,
                 method: req.method
