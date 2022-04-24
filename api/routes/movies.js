@@ -95,14 +95,16 @@ router.patch("/:movieId", (req, res, next) => {
         _id:movieId
     }, {
         $set: updatedMovie
-    }).then(result => {
+    })
+    .then(result => {
         res.status(200).json({
             message: "Updated Movie",
+            result,
             Movie: {
-                title: result.title,
-                producer: result.producer,
-                year: result.year,
-                id: result._id
+                title: updatedMovie.title,
+                producer: updatedMovie.producer,
+                year: updatedMovie.year,
+                id: updatedMovie._id
             },
             metadata: {
                 host: req.hostname,
@@ -126,11 +128,11 @@ router.delete("/:movieId", (req, res, next) => {
     .then(result => {
         res.status(200).json({
             message: "Movie Deleted",
-            Movie: {
-                title: result.title,
-                producer: result.producer,
-                year: result.year,
-                id: result._id
+            result,
+
+            metadata: {
+                host: req.hostname,
+                method: req.method
             }
         })
     })
