@@ -5,16 +5,9 @@ const Movie = require("../models/movie")
 
 
 router.get("/", (req, res, next) => {
-    Movie.find({})
+    Movie.find()
     .then(result => {
-        res.status(200).json({
-            Movie: {
-                title: result.title,
-                producer: result.producer,
-                year: result.year,
-                id: result._id
-            }
-        })
+        res.status(200).json(result)
     })
     .catch(err => {
         res.status(500).json({
