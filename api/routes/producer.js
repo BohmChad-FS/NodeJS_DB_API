@@ -107,6 +107,20 @@ router.get("/:producerId", (req, res, next) => {
 
 router.patch("/:producerId", (req, res, next) => {
     const producerId = req.params.producerId;
+
+    // Producer.findById(producerId)
+    // .exec()
+    // .then(producer => {
+    //     if(!producer){
+    //         console.log(producer);
+    //         return res.status(404).json({
+    //             message: Messages.producer_not_found,
+    //             note: Messages.check_id,
+    //             url: Messages.check_get
+    //         })
+    //     }
+    // })
+
     
     const updatedProducer = {
         movie: req.body.movie,
@@ -118,18 +132,12 @@ router.patch("/:producerId", (req, res, next) => {
     }, {
         $set: updatedProducer
     })
+    .exec()
     .then(result => {
-        if(producerId !== result){
-            console.log(producerId);
-            return res.status(404).json({
-                message: Messages.producer_not_found
-            })
-        }
-
         res.status(200).json({
             message: Messages.producer_update,
             result,
-            Producer: {
+            producer: {
                 producer: updatedProducer.producer,
                 id: updatedProducer._id
             }
@@ -152,7 +160,7 @@ router.delete("/:producerId", (req, res, next) => {
     })
     .exec()
     .then(result => {
-        if(producerId !== result){
+        if(!result){
             console.log(producerId);
             return res.status(404).json({
                 message: Messages.producer_not_found
