@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const authorRoutes = require("../api/routes/authors")
 const bookRoutes = require("../api/routes/books")
 const movieRoutes = require("../api/routes/movies")
+const producerRoutes = require("../api/routes/producer")
 
 
 // middleware for logging
@@ -38,6 +39,7 @@ app.use("/authors", authorRoutes);
 app.use("/books", bookRoutes);
 
 app.use("/movies", movieRoutes);
+app.use("/producer", producerRoutes);
 
 
 
