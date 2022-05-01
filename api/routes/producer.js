@@ -82,7 +82,7 @@ router.get("/:producerId", (req, res, next) => {
     const producerId = req.params.producerId;
     Producer.findById(producerId)
     .select("producer _id")
-    .populate("movie", "title producer")
+    .populate("movie", "title producer year")
     .exec()
     .then(producer => {
         if(!producer){
